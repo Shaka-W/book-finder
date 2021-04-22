@@ -88,7 +88,13 @@ function displayBooks(bookObj) {
   bookTitle.textContent = bookObj.title;
   bookImage.src = bookObj.image;
   bookAuthor.textContent = `Author: ${bookObj.author}`;
-  bookPublisher.textContent = `Publisher: ${bookObj.publisher}`;
+
+  if (bookObj.publisher) {
+    bookPublisher.textContent = `Publisher: ${bookObj.publisher}`;
+  } else {
+    bookPublisher.textContent = `Publisher: `;
+  }
+
   publishedOn.textContent = `Published: ${bookObj.published}`;
 
   book.append(bookTitle, bookImage, bookAuthor, bookPublisher, publishedOn);
