@@ -11,6 +11,10 @@ $margin-lg: 2rem;
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #264653;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .container {
