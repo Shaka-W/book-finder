@@ -83,8 +83,9 @@ p {
     margin-right: 0;
   }
 
-  &__title {
-    font-size: 2rem;
+  &__link {
+    text-decoration: none;
+    color: #2A9D8F;
   }
 
   &__image {
@@ -103,10 +104,6 @@ p {
 
   .book {
     margin-right: 0;
-
-    &__title {
-      font-size: 1.5rem;
-    }
   }
 }
 
@@ -114,12 +111,6 @@ p {
   #form {
     &__search {
       margin-bottom: $margin-base;
-    }
-  }
-
-  .book {
-    &__title {
-      font-size: 1.3rem;
     }
   }
 }
