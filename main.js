@@ -20,20 +20,25 @@ function getBooks(e) {
     .then((data) => {
       for (let i = 0; i < data.items.length; i++) {
         const title = data.items[i].volumeInfo.title;
+        const link = data.items[i].volumeInfo.infoLink;
         const image = data.items[i].volumeInfo.imageLinks.thumbnail;
         const author = data.items[i].volumeInfo["authors"].toString();
         const publisher = data.items[i].volumeInfo.publisher;
         const publishedDate = data.items[i].volumeInfo.publishedDate;
 
-        const book = Book(title, image, author, publisher, publishedDate);
+        const book = Book(title, link, image, author, publisher, publishedDate);
         displayBooks(book);
       }
+    })
+    .catch((error) => {
+      console.error(error);
     });
 }
 
-function Book(title, image, author, publisher, published) {
+function Book(title, link, image, author, publisher, published) {
   return {
     title,
+    link,
     image,
     author,
     publisher,
@@ -59,6 +64,13 @@ function createBookTitle() {
   return h3;
 }
 
+function createBookInfo() {
+  let a = document.createElement("a");
+  a.classList.add("book__link");
+  a.setAttribute("target", "_blank");
+  return a;
+}
+
 function createBookAuthor() {
   let author = document.createElement("p");
   author.classList.add("book__author");
@@ -80,12 +92,15 @@ function createBookPublished() {
 function displayBooks(bookObj) {
   let book = createBook();
   let bookTitle = createBookTitle();
+  let bookLink = createBookInfo();
   let bookImage = createBookImage();
   let bookAuthor = createBookAuthor();
   let bookPublisher = createBookPublisher();
   let publishedOn = createBookPublished();
 
-  bookTitle.textContent = bookObj.title;
+  bookLink.href = bookObj.link;
+  bookLink.textContent = bookObj.title;
+  bookTitle.append(bookLink);
   bookImage.src = bookObj.image;
   bookAuthor.textContent = `Author: ${bookObj.author}`;
 
@@ -98,6 +113,7 @@ function displayBooks(bookObj) {
   publishedOn.textContent = `Published: ${bookObj.published}`;
 
   book.append(bookTitle, bookImage, bookAuthor, bookPublisher, publishedOn);
+
   container.append(book);
 }
 
